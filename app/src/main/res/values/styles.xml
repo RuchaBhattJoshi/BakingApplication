@@ -47,10 +47,15 @@
 
     <!-- Style for Tab -->
     <style name="CategoryTabTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
-
+    <style name="ImageButtonStyle">
+    <item name="android:layout_width">@dimen/size_button</item>
+    <item name="android:layout_height">@dimen/size_button</item>
+    <item name="android:layout_margin">@dimen/margin_activity</item>
+        <item name="android:background">@drawable/step_circle</item>
+    </style>
 
 
 </resources>

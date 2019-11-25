@@ -42,17 +42,12 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    implementation 'com.google.android.exoplayer:exoplayer:2.7.3'
+
 
     // Retrofit and Gson
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-//
-//
-//    // OkHttp
-//    implementation 'com.squareup.okhttp3:okhttp:3.14.1'
-//    // OkHttp interceptor
-//    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
-
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
