@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/iv_add"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            android:layout_width="@dimen/size_add_image"-->
+    <!--            android:layout_height="@dimen/size_add_image"-->
+    <!--            android:layout_margin="@dimen/margin_activity"-->
+    <!--            android:contentDescription="@string/add_content_description" />-->
+
+    <!-- Display quantity of the ingredient-->
+    <TextView
+        android:id="@+id/tv_quantity"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="33dp"
+        android:padding="@dimen/margin_activity_small"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_ingredient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="500.0" />
+
+    <!-- Display measure of the ingredient-->
+    <TextView
+        android:id="@+id/tv_measure"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_quantity"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="TBLSP" />
+
+    <!-- Display ingredient -->
+    <TextView
+        android:id="@+id/tv_ingredient"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_activity"
+        android:maxLines="2"
+        android:layout_marginStart="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_quantity"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Graham Cracker crumbs" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
