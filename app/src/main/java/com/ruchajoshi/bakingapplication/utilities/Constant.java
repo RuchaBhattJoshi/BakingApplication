@@ -1,5 +1,15 @@
 package com.ruchajoshi.bakingapplication.utilities;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.ruchajoshi.bakingapplication.R;
+import com.ruchajoshi.bakingapplication.models.Ingredient;
+import com.ruchajoshi.bakingapplication.models.Step;
+
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.List;
+
 public final class Constant {
 
     public static final String RECIPE= "RECIPE";
@@ -22,4 +32,91 @@ public final class Constant {
     public static final int GRID_COLUMN_WIDTH = 520;
     public static final int GRID_COLUMN_WIDTH_DEFAULT = 48;
     public static final int GRID_SPAN_COUNT = 1;
+
+    public static final int POSITION_ZERO = 0;
+    public static final int POSITION_ONE = 1;
+    public static final int POSITION_TWO = 2;
+    public static final int POSITION_THREE = 3;
+    public static final int NUM_POSITION_FOUR = 4;
+
+    public static final String DEFAULT_STRING = "";
+    public static final int DEFAULT_INTEGER = 1;
+    public static final int DEFAULT_INTEGER_FOR_SERVINGS = 8;
+
+
+    public static final int WIDGET_PENDING_INTENT_ID = 0;
+
+    public static final String NAME_OKHTTP= "OkHttp";
+    public static final String RECIPE_NAME_AT_ZERO = "Nutella Pie";
+    public static final String RECIPE_NAME_AT_ONE = "Brownies";
+
+    static final int CONNECT_TIMEOUT_TEN = 10;
+    static final int READ_TIMEOUT_TWENTY = 20;
+
+    public static final String EXTRA_RECIPE = "recipe";
+
+
+    /** Constants for ExoPlayer */
+    public static final float PLAYER_PLAYBACK_SPEED = 1f;
+    public static final int REWIND_INCREMENT = 3000;
+    public static final int FAST_FORWARD_INCREMENT = 3000;
+    public static final int START_POSITION = 0;
+
+    public static int getImageResource(int position) {
+        int imageResourceId;
+        switch (position % NUM_POSITION_FOUR) {
+            case POSITION_ZERO:
+                imageResourceId = R.drawable.nutella_pie;
+                break;
+            case POSITION_ONE:
+                imageResourceId = R.drawable.brownies;
+                break;
+            case POSITION_TWO:
+                imageResourceId = R.drawable.yellow_cake;
+                break;
+            case POSITION_THREE:
+                imageResourceId = R.drawable.cheesecake;
+                break;
+            default:
+                imageResourceId = R.drawable.cake;
+                break;
+        }
+        return imageResourceId;
+    }
+
+    public static String toIngredientString(List<Ingredient> ingredientList) {
+        if (ingredientList == null) {
+            return null;
+        }
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<Ingredient>>() {}.getType();
+        return gson.toJson(ingredientList, listType);
+    }
+
+    public static List<Step> toStepList(String stepString) {
+        if (stepString == null) {
+            return Collections.emptyList();
+        }
+        Gson gson = new Gson();
+        Type stepListType = new TypeToken<List<Step>>() {}.getType();
+        return gson.fromJson(stepString, stepListType);
+    }
+
+    public static List<Ingredient> toIngredientList(String ingredientString) {
+        if (ingredientString == null) {
+            return Collections.emptyList();
+        }
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<Ingredient>>() {}.getType();
+        return gson.fromJson(ingredientString, listType);
+    }
+
+    public static String toStepString(List<Step> stepList) {
+        if (stepList == null) {
+            return null;
+        }
+        Gson gson = new Gson();
+        Type stepListType = new TypeToken<List<Step>>() {}.getType();
+        return gson.toJson(stepList, stepListType);
+    }
 }

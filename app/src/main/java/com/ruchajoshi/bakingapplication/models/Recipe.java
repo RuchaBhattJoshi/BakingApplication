@@ -36,6 +36,15 @@ public class Recipe implements Parcelable {
     @Expose
     private String mImage;
 
+    public Recipe(int recipeId, String name, List<Ingredient> ingredients, List<Step> steps,
+                  int servings, String image) {
+        mId = recipeId;
+        mName = name;
+        mIngredients = ingredients;
+        mSteps = steps;
+        mServings = servings;
+        mImage = image;
+    }
 
     protected Recipe(Parcel in) {
         mId = in.readInt();

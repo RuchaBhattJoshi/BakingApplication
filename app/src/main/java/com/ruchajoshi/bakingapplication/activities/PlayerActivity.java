@@ -16,7 +16,6 @@ import com.ruchajoshi.bakingapplication.models.Recipe;
 import com.ruchajoshi.bakingapplication.models.Step;
 import com.ruchajoshi.bakingapplication.utilities.Constant;
 
-import butterknife.ButterKnife;
 
 public class PlayerActivity extends AppCompatActivity {
 
@@ -78,7 +77,7 @@ public class PlayerActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         switch (itemId) {
-            case R.id.home:
+            case android.R.id.home:
                 onBackPressed();
                 return true;
             default:

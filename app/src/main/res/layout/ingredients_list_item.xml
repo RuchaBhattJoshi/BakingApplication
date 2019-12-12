@@ -16,7 +16,6 @@
     <!--            android:layout_margin="@dimen/margin_activity"-->
     <!--            android:contentDescription="@string/add_content_description" />-->
 
-    <!-- Display quantity of the ingredient-->
     <TextView
         android:id="@+id/tv_quantity"
         android:layout_width="60dp"
@@ -31,7 +30,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="500.0" />
 
-    <!-- Display measure of the ingredient-->
     <TextView
         android:id="@+id/tv_measure"
         android:layout_width="120dp"
@@ -43,7 +41,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="TBLSP" />
 
-    <!-- Display ingredient -->
     <TextView
         android:id="@+id/tv_ingredient"
         android:layout_width="0dp"

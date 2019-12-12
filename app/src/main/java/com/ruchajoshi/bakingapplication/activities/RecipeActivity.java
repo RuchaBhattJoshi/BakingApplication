@@ -3,9 +3,11 @@ package com.ruchajoshi.bakingapplication.activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.ruchajoshi.bakingapplication.api.BakingHelper;
@@ -54,9 +56,13 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
         call.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(@NonNull Call<List<Recipe>> call, @NonNull Response<List<Recipe>> response) {
-                mRecipeAdapter = new RecipeAdapter(response.body(),getApplicationContext(),RecipeActivity.this);
-                recipesListRecyclerView.setLayoutManager(layoutManager);
-                recipesListRecyclerView.setAdapter(mRecipeAdapter);
+
+                if(response.isSuccessful()){
+                    mRecipeAdapter = new RecipeAdapter(response.body(),getApplicationContext(),RecipeActivity.this);
+                    recipesListRecyclerView.setLayoutManager(layoutManager);
+                    recipesListRecyclerView.setAdapter(mRecipeAdapter);
+                }
+
             }
 
             @Override
@@ -72,8 +78,31 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
         Bundle b = new Bundle();
         b.putParcelable(Constant.RECIPE, recipe);
 
+        updateSharedPreference(recipe);
+
         Intent intent = new Intent(RecipeActivity.this, RecipeDetailsActivity.class);
         intent.putExtra(Constant.RECIPE,b);
         startActivity(intent);
     }
+
+
+    private void updateSharedPreference(Recipe recipe) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        String ingredientString = Constant.toIngredientString(recipe.getmIngredients());
+
+        editor.putString(getString(R.string.pref_ingredient_list_key), ingredientString);
+        editor.putString(getString(R.string.pref_recipe_name_key), recipe.getmName());
+
+        String stepString = Constant.toStepString(recipe.getmSteps());
+
+        editor.putInt(getString(R.string.pref_recipe_id_key), recipe.getmId());
+        editor.putString(getString(R.string.pref_step_list_key), stepString);
+        editor.putString(getString(R.string.pref_image_key), recipe.getmImage());
+        editor.putInt(getString(R.string.pref_servings_key), recipe.getmServings());
+
+        editor.apply();
+    }
+
 }

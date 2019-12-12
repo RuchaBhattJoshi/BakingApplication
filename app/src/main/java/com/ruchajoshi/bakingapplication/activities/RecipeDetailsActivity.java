@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -65,7 +64,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsFra
         {
             Bundle b = intent.getBundleExtra(Constant.RECIPE);
             recipe = b.getParcelable(Constant.RECIPE);
-            Log.d("recipe", "recipe "+recipe.getmName());
+            Log.d("recipe", "recipe "+recipe.getmId());
 
             setTitle(recipe.getmName());
 
@@ -95,8 +94,25 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsFra
     private void displayImage() {
         String imageUrl = recipe.getmImage();
         if (imageUrl.isEmpty()) {
-            recipeImage.setImageResource(R.drawable.cake);
-        } else {
+            switch (recipe.getmId()) {
+                case 1:
+                    recipeImage.setImageResource(R.drawable.nutella_pie);
+                    break;
+                case 2:
+                    recipeImage.setImageResource(R.drawable.brownies);
+                    break;
+                case 3:
+                    recipeImage.setImageResource(R.drawable.yellow_cake);
+                    break;
+                case 4:
+                    recipeImage.setImageResource(R.drawable.cheesecake);
+                    break;
+                default:
+                    recipeImage.setImageResource(R.drawable.cake);
+                    break;
+            }
+        }
+        else {
             Picasso.get()
                     .load(imageUrl)
                     .error(R.drawable.cake)

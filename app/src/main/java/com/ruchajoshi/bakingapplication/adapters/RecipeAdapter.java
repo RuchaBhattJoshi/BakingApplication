@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ruchajoshi.bakingapplication.R;
 import com.ruchajoshi.bakingapplication.models.Recipe;
+import com.ruchajoshi.bakingapplication.utilities.Constant;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(recipes.get(position),listener);
+        holder.bind(recipes.get(position),listener,position);
     }
 
     @Override
@@ -63,16 +64,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             ButterKnife.bind(this,itemView);
         }
 
-        public void bind(final Recipe recipe, final RecipeClickListener recipeClickListener)
+        public void bind(final Recipe recipe, final RecipeClickListener recipeClickListener, int position)
         {
             recipeNameTextView.setText(recipe.getmName());
-            if(!recipe.getmImage().equals("") && recipe.getmImage() != null)
-            {
-                Picasso.get()
-                        .load(recipe.getmImage())
-                        .placeholder(R.drawable.cake)
-                        .into(recipeImageView);
-            }
+
+            int imageResourceId = Constant.getImageResource(position);
+            recipeImageView.setImageResource(imageResourceId);
+
+//            if(!recipe.getmImage().equals("") && recipe.getmImage() != null)
+//            {
+//                Picasso.get()
+//                        .load(recipe.getmImage())
+//                        .placeholder(R.drawable.cake)
+//                        .into(recipeImageView);
+//            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
