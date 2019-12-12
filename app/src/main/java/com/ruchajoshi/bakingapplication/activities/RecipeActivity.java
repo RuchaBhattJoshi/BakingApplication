@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import com.ruchajoshi.bakingapplication.utilities.GridAutofitLayoutManager;
 import com.ruchajoshi.bakingapplication.R;
 import com.ruchajoshi.bakingapplication.models.Recipe;
 import com.ruchajoshi.bakingapplication.adapters.RecipeAdapter;
+import com.ruchajoshi.bakingapplication.widget.RecipeWidgetProvider;
 
 import java.util.List;
 
@@ -79,6 +82,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
         b.putParcelable(Constant.RECIPE, recipe);
 
         updateSharedPreference(recipe);
+        sendBroadcastToWidget();
 
         Intent intent = new Intent(RecipeActivity.this, RecipeDetailsActivity.class);
         intent.putExtra(Constant.RECIPE,b);
@@ -104,5 +108,16 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
 
         editor.apply();
     }
+
+    private void sendBroadcastToWidget() {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, RecipeWidgetProvider.class));
+
+        Intent updateAppWidgetIntent = new Intent();
+        updateAppWidgetIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        updateAppWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+        sendBroadcast(updateAppWidgetIntent);
+    }
+
 
 }
