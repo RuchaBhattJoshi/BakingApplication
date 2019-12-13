@@ -1,12 +1,12 @@
 # BakingApplication
 Baking App (Project 4) for Udacity's Android Developer Nanodegree by Google.
 
-Fetch recipers data from external link using Retrofit
-Preview data by using Recycler view
-Use Fragments to create a responsive design that works on phones and tablets
-Use Exoplayer to display videos
-Add a Configurable Widget to your app experience
-Handle error cases in Android by Espresso
+Fetch recipers data from external link using **Retrofit**
+Preview data by using **Recycler view**
+Use Fragments to create a **responsive design** that works on phones and tablets
+Use **Exoplayer** to display videos
+Add a Configurable **Widget** to your app experience
+Handle error cases in Android by **Espresso**
 
 
 ## Languages, libraries and tools used
