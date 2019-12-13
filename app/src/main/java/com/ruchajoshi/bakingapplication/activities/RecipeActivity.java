@@ -2,9 +2,11 @@ package com.ruchajoshi.bakingapplication.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.IdlingResource;
 
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -19,6 +21,7 @@ import com.ruchajoshi.bakingapplication.utilities.GridAutofitLayoutManager;
 import com.ruchajoshi.bakingapplication.R;
 import com.ruchajoshi.bakingapplication.models.Recipe;
 import com.ruchajoshi.bakingapplication.adapters.RecipeAdapter;
+import com.ruchajoshi.bakingapplication.utilities.SimpleIdlingResource;
 import com.ruchajoshi.bakingapplication.widget.RecipeWidgetProvider;
 
 import java.util.List;
@@ -41,6 +44,9 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
 
     @BindView(R.id.recipesList)
     RecyclerView recipesListRecyclerView;
+
+    @Nullable
+    private SimpleIdlingResource mIdlingResource;
 
     @Override
     protected void onCreate( @Nullable Bundle savedInstanceState) {
@@ -89,7 +95,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
         startActivity(intent);
     }
 
-
     private void updateSharedPreference(Recipe recipe) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -119,5 +124,13 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
         sendBroadcast(updateAppWidgetIntent);
     }
 
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new SimpleIdlingResource();
+        }
+        return mIdlingResource;
+    }
 
 }
