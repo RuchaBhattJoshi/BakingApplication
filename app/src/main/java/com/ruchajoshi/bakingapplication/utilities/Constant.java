@@ -50,9 +50,6 @@ public final class Constant {
     public static final String RECIPE_NAME_AT_ZERO = "Nutella Pie";
     public static final String RECIPE_NAME_AT_ONE = "Brownies";
 
-    static final int CONNECT_TIMEOUT_TEN = 10;
-    static final int READ_TIMEOUT_TWENTY = 20;
-
     public static final String EXTRA_RECIPE = "recipe";
 
 

@@ -1,11 +1,18 @@
 package com.ruchajoshi.bakingapplication;
 
+import android.content.Context;
+
+import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.IdlingResource;
 import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
+
+
 import com.ruchajoshi.bakingapplication.activities.RecipeActivity;
+import com.ruchajoshi.bakingapplication.activities.RecipeDetailsActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,15 +21,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static com.ruchajoshi.bakingapplication.utilities.Constant.POSITION_ZERO;
 import static com.ruchajoshi.bakingapplication.utilities.Constant.RECIPE_NAME_AT_ZERO;
 
 @RunWith(AndroidJUnit4.class)
-public class RecipeActivityBasicTest {
+
+public class RecipeActivityIntentTest {
 
     private IdlingResource mIdlingResource;
 
@@ -35,10 +44,12 @@ public class RecipeActivityBasicTest {
         IdlingRegistry.getInstance().register(mIdlingResource);
     }
 
+
     @Test
-    public void scrollToPosition_CheckRecipeName() {
-        onView(withId(R.id.recipesList)).perform(RecyclerViewActions.scrollToPosition(POSITION_ZERO));
-        onView(withText(RECIPE_NAME_AT_ZERO)).check(matches(isDisplayed()));
+    public void clickRecipe_LaunchDetailActivityIntent() {
+        onView(withId(R.id.recipesList)).perform(RecyclerViewActions.actionOnItem(
+                        hasDescendant(withText(RECIPE_NAME_AT_ZERO)), click()));
+            intended(hasComponent(RecipeDetailsActivity.class.getName()));
     }
 
     @After
@@ -47,4 +58,5 @@ public class RecipeActivityBasicTest {
             IdlingRegistry.getInstance().unregister(mIdlingResource);
         }
     }
+
 }
