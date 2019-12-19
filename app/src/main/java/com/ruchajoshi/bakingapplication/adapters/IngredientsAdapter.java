@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ruchajoshi.bakingapplication.models.Ingredient;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Optional;
 
 
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.IngredientsViewHolder> {
@@ -47,7 +49,11 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     @Override
     public void onBindViewHolder(@NonNull IngredientsViewHolder holder, int position) {
         Ingredient ingredient = mIngredients.get(position);
-        holder.bind(ingredient, position);
+        //holder.bind(ingredient, position);
+
+        holder.tvQuantity.setText(String.valueOf(ingredient.getmQuantity()));
+        holder.tvMeasure.setText(ingredient.getmMeasure());
+        holder.tvIngredient.setText(ingredient.getmIngredient());
     }
 
 
@@ -59,25 +65,23 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     public class IngredientsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+
+        @Nullable
         @BindView(R.id.tv_quantity)
         TextView tvQuantity;
+
+        @Nullable
         @BindView(R.id.tv_measure)
         TextView tvMeasure;
+
+        @Nullable
         @BindView(R.id.tv_ingredient)
         TextView tvIngredient;
 
-        public IngredientsViewHolder(View itemView) {
+         IngredientsViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
             itemView.setOnClickListener(this);
-        }
-
-
-        void bind(Ingredient ingredient, int position) {
-            // Set the quantity, measure, ingredient to the TextView
-           tvQuantity.setText(String.valueOf(ingredient.getmQuantity()));
-           tvMeasure.setText(ingredient.getmMeasure());
-           tvIngredient.setText(ingredient.getmIngredient());
         }
 
 

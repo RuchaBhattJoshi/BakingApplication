@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -83,21 +84,27 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
 
     private boolean mPlayWhenReady;
 
+    @Nullable
     @BindView(R.id.bt_previous)
     ImageButton btPrevious;
 
+    @Nullable
     @BindView(R.id.tv_step_id)
     TextView tvStepId;
 
+    @Nullable
     @BindView(R.id.bt_next)
     ImageButton btNext;
 
+    @Nullable
     @BindView(R.id.tv_description)
     TextView tvDescription;
 
+    @Nullable
     @BindView(R.id.iv_empty)
     ImageView ivEmpty;
 
+    @Nullable
     @BindView(R.id.player_view)
     PlayerView playerView;
 
@@ -109,7 +116,7 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_step_detail, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(StepDetailFragment.this,view);
 
         if (savedInstanceState != null) {
             mStep = savedInstanceState.getParcelable(Constant.SAVE_STEP);

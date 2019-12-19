@@ -3,6 +3,7 @@ package com.ruchajoshi.bakingapplication;
 import android.content.Context;
 
 import androidx.test.InstrumentationRegistry;
+import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.IdlingResource;
 import androidx.test.espresso.contrib.RecyclerViewActions;
@@ -40,15 +41,24 @@ public class RecipeActivityIntentTest {
 
     @Before
     public void registerIdlingResource() {
-        mIdlingResource = mActivityTestRule.getActivity().getIdlingResource();
-        IdlingRegistry.getInstance().register(mIdlingResource);
+
+        ActivityScenario activityScenario = ActivityScenario.launch(RecipeActivity.class);
+        activityScenario.onActivity(new ActivityScenario.ActivityAction<RecipeActivity>() {
+            @Override
+            public void perform(RecipeActivity activity) {
+
+                mIdlingResource = activity.getIdlingResource();
+                IdlingRegistry.getInstance().register(mIdlingResource);
+
+            }
+        });
     }
 
 
     @Test
     public void clickRecipe_LaunchDetailActivityIntent() {
-        onView(withId(R.id.recipesList)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText(RECIPE_NAME_AT_ZERO)), click()));
-       // onView(withId(R.id.recipesList)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
+        //onView(withId(R.id.recipesList)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText(RECIPE_NAME_AT_ZERO)), click()));
+        onView(withId(R.id.recipesList)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
         intended(hasComponent(RecipeDetailsActivity.class.getName()));
     }
 
