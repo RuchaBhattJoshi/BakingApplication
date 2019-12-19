@@ -47,9 +47,9 @@ public class RecipeActivityIntentTest {
 
     @Test
     public void clickRecipe_LaunchDetailActivityIntent() {
-        onView(withId(R.id.recipesList)).perform(RecyclerViewActions.actionOnItem(
-                        hasDescendant(withText(RECIPE_NAME_AT_ZERO)), click()));
-            intended(hasComponent(RecipeDetailsActivity.class.getName()));
+        onView(withId(R.id.recipesList)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText(RECIPE_NAME_AT_ZERO)), click()));
+       // onView(withId(R.id.recipesList)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
+        intended(hasComponent(RecipeDetailsActivity.class.getName()));
     }
 
     @After

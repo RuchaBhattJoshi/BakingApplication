@@ -7,12 +7,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.android.bakingapp.ui.detail.DetailActivity">
+        android:layout_height="match_parent">
 
 
         <fragment
-            android:id="@+id/master_list_ingredients_fragment"
+            android:id="@+id/ingredients_fragment"
             android:name="com.ruchajoshi.bakingapplication.fragments.IngredientsFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -38,7 +37,7 @@
             android:background="@color/color_frame_player_bg"/>
 
         <fragment
-            android:id="@+id/master_list_steps_fragment"
+            android:id="@+id/steps_fragment"
             android:name="com.ruchajoshi.bakingapplication.fragments.StepsFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"

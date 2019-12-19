@@ -1,5 +1,6 @@
 package com.ruchajoshi.bakingapplication;
 
+import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.IdlingResource;
 import androidx.test.espresso.contrib.RecyclerViewActions;
@@ -31,8 +32,17 @@ public class RecipeActivityBasicTest {
 
     @Before
     public void registerIdlingResource() {
-        mIdlingResource = mActivityTestRule.getActivity().getIdlingResource();
-        IdlingRegistry.getInstance().register(mIdlingResource);
+
+        ActivityScenario activityScenario = ActivityScenario.launch(RecipeActivity.class);
+        activityScenario.onActivity(new ActivityScenario.ActivityAction<RecipeActivity>() {
+            @Override
+            public void perform(RecipeActivity activity) {
+
+                mIdlingResource = activity.getIdlingResource();
+                IdlingRegistry.getInstance().register(mIdlingResource);
+
+            }
+        });
     }
 
     @Test

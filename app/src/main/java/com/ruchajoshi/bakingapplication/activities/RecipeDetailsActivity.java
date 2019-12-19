@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.ruchajoshi.bakingapplication.adapters.DetailPagerAdapter;
+import com.ruchajoshi.bakingapplication.fragments.StepDetailFragment;
 import com.ruchajoshi.bakingapplication.fragments.StepsFragment;
 import com.ruchajoshi.bakingapplication.utilities.Constant;
 import com.ruchajoshi.bakingapplication.R;
@@ -57,7 +58,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(RecipeDetailsActivity.this);
-        //isTablet = getResources().getBoolean(R.bool.isTablet);
+        isTablet = getResources().getBoolean(R.bool.isTablet);
 
         Intent intent = getIntent();
         if(intent.hasExtra(Constant.RECIPE))
@@ -74,7 +75,7 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsFra
             numberServing.setText(String.valueOf(numServings));
 
             setCollapsingToolbarTextColor();
-            showUpButton();
+            showUpButton(isTablet);
 
             stepList = recipe.getmSteps();
 
@@ -123,14 +124,28 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsFra
 
     @Override
     public void onStepSelected(int stepIndex) {
-        Bundle b = new Bundle();
-        b.putInt(Constant.EXTRA_STEP_INDEX, stepIndex);
-        b.putParcelable(Constant.RECIPE, recipe);
+        if(isTablet){
+            StepDetailFragment stepDetailFragment = new StepDetailFragment();
+            Step step = recipe.getmSteps().get(stepIndex);
+            stepDetailFragment.setStep(step);
+            stepDetailFragment.setStepIndex(stepIndex);
 
-        Intent intent = new Intent(this, PlayerActivity.class);
-        intent.putExtra(Constant.EXTRA_STEP_INDEX, b);
-        intent.putExtra(Constant.RECIPE, b);
-        startActivity(intent);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.step_detail_container, stepDetailFragment)
+                    .commit();
+
+        }
+        else
+        {
+            Bundle b = new Bundle();
+            b.putInt(Constant.EXTRA_STEP_INDEX, stepIndex);
+            b.putParcelable(Constant.RECIPE, recipe);
+
+            Intent intent = new Intent(this, PlayerActivity.class);
+            intent.putExtra(Constant.EXTRA_STEP_INDEX, b);
+            intent.putExtra(Constant.RECIPE, b);
+            startActivity(intent);
+        }
 
     }
 
@@ -141,8 +156,11 @@ public class RecipeDetailsActivity extends AppCompatActivity implements StepsFra
                 getResources().getColor(R.color.white));
     }
 
-    private void showUpButton( ) {
-        setSupportActionBar(toolbar);
+    private void showUpButton(boolean isTablet ) {
+
+        if (!isTablet) {
+            setSupportActionBar(toolbar);
+        }
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
