@@ -31,7 +31,7 @@
             app:layout_constraintBottom_toTopOf="@+id/horizontal_guideline"
             app:layout_constraintStart_toStartOf="@+id/vertical_guideline"
             app:layout_constraintEnd_toEndOf="@+id/vertical_guideline"
-            android:background="@color/color_frame_player_bg"/>
+            android:background="@color/colorPrimaryDark"/>
 
         <fragment
             android:id="@+id/steps_fragment"

@@ -11,16 +11,16 @@
             android:id="@+id/tv_steps_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
             android:gravity="center"
             android:padding="@dimen/margin_activity_small"
-            android:textColor="@color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
             android:textSize="17sp"
             app:layout_constraintBottom_toTopOf="@+id/rv_steps"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/steps_label" />
+            android:text="@string/steps_label" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_steps"

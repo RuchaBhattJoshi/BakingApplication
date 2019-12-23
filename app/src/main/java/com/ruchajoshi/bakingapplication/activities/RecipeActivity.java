@@ -56,10 +56,14 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
         mBakingService = BakingHelper.getInstance(RecipeActivity.this);
         layoutManager = new GridAutofitLayoutManager(
                 this, GRID_COLUMN_WIDTH);
+
+        getIdlingResource();
         getAllRecipes();
     }
 
     private void getAllRecipes() {
+        if (mIdlingResource!=null)
+            mIdlingResource.setIdleState(false);
 
         Call<List<Recipe>> call = mBakingService.getRecipes();
         call.enqueue(new Callback<List<Recipe>>() {
@@ -72,11 +76,16 @@ public class RecipeActivity extends AppCompatActivity implements RecipeAdapter.R
                     recipesListRecyclerView.setAdapter(mRecipeAdapter);
                 }
 
+                mIdlingResource.setIdleState(true);
+
+
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Recipe>> call, Throwable t) {
                 t.printStackTrace();
+                mIdlingResource.setIdleState(true);
+
             }
         });
 
